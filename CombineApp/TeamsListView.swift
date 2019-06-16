@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  TeamsListView.swift
 //  CombineApp
 //
 //  Created by Luciano Almeida on 16/06/19.
