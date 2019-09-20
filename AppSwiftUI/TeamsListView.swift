@@ -13,13 +13,13 @@ struct TeamsListView : View {
     var controller = TeamsListController()
     
     @State var showIndicator: Bool = false
-    @ObjectBinding var teamList = TeamsList()
+    @ObservedObject var teamList = TeamsList()
     
     var body: some View {
         NavigationView {
             VStack {
                 if showIndicator {
-                    ActivityIndicatorView()
+                  ActivityIndicatorView()
                 }
                 List(teamList.teams, rowContent: { (team) in
                     TeamView(team: team)
@@ -32,8 +32,10 @@ struct TeamsListView : View {
         .onAppear(perform: {
             self.controller.fetchDrivers(into: self.teamList)
         })
-        .onReceive(controller.isFetching) { (isFetching) in
-            self.showIndicator = isFetching
+        .onReceive(controller.$isFetching) { (isFetching) in
+            if self.showIndicator != isFetching {
+              self.showIndicator = isFetching
+            }
         }
         
     }
@@ -42,7 +44,7 @@ struct TeamsListView : View {
 struct TeamView: View {
     @State var team: Team
     var body: some View {
-        VStack(alignment: .leading, spacing: Length(5)) {
+      VStack(alignment: .leading, spacing: 1.0) {
             Text(team.name)
             Text("\(team.engine) engine")
             VStack(alignment: .leading) {
