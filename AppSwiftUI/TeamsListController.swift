@@ -22,7 +22,7 @@ class TeamsList: ObservableObject {
 
 class TeamsListController {
   
-    var injected: String = "$(JOEY_CATCH_PHASE)"
+    static var injected: String = "$(JOEY_CATCH_PHASE)"
   
     @Published var isFetching: Bool = false
     
